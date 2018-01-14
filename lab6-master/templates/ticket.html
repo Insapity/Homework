@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block body1 %}
+    <div id="body1">
+        <br><br>
+        <div class="course-obj">
+            <div class="course-obj-photo-and-title course-obj-border-bottom">
+
+            <div class="course-obj-name">
+                <p> {{ course.id_registr }} </p>
+            </div>
+            </div>
+            <div class="course-obj-tutor-and-category course-obj-border-bottom">
+
+                <div class="course-obj-category">
+                    <span class="course-obj-titles">Выбранная комната</span><br><br><br>
+                    <p class="course-obj-data">{{ course.nomer_registr }}</p>
+                </div>
+            </div>
+        </div>
+        {% if is_paginated %}
+                <div class="pagination">
+                    <span class="page-links">
+                        {% if page_obj.has_previous %}
+                            <a class="aquo" href="/courses?page={{ page_obj.previous_page_number }}">&laquo;</a>
+                        {% else %}
+                            <span class="unavailable" href="">&laquo;</span>
+                        {% endif %}
+                        {% for page in page_obj.paginator.page_range %}
+                            {% if page %}
+                                {% ifequal page page_obj.number %}
+                                    <span class="current-page" href="">{{ page }}</span>
+                                {% else %}
+                                    <a href="/courses?page={{ page }}" class="page">{{ page }}</a>
+                                {% endifequal %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <a class="aquo" href="/courses?page={{ page_obj.next_page_number }}">&raquo;</a>
+                        {% else %}
+                            <span class="unavailable" href="">&raquo;</span>
+                        {% endif %}
+                        <span hidden id="per-page">{{ page_obj.paginator.per_page }}</span>
+                    </span>
+                </div>
+            {% endif %}
+    </div>
+{% endblock %}

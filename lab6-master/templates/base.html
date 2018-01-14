@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking.com</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'Bootstrap/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Bootstrap/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'Bootstrap/js/bootstrap.min.js' %}">
+    <link rel="icon" href="{% static '/images/logo.png' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static '/images/logo.png' %}" type="image/x-icon">
+{#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>#}
+    <script type="text/javascript" src="{% static 'Bootstrap/js/my.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Bootstrap/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Bootstrap/js/jquery-3.2.1.min.js' %}"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                 <a class="navbar-brand" href="{% url 'main' %}"><img alt="Brand" src="{% static '/images/BookingShapk1.png' %}" width="300" height="51"></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{% url 'main' %}">HOME</a></li>
+                    <li><a href="{% url 'courses_url' %}">ORDERS</a></li>
+                    <li><a href="{% url 'about_url' %}">ABOUT</a></li>
+                    <li><a href="{% url 'db_url' %}">SQL</a></li>
+                    <li><a href="{% url 'admin:index' %}">ADMIN</a></li>
+                     <li>
+                        <div class="dropdown">
+                            <button class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="{% static "images/auth_icon.png" %}" width="30" height="30" alt=""/>
+{#                                <span class="caret"></span>#}
+                            </button>
+                            <div class="dropdown-content">
+                                {% if request.user.is_authenticated %}
+                                    <span>{{ request.user.username }}</span>
+                                    <a href="{% url 'logout_url' %}">Выйти</a>
+                                {% else %}
+                                    <a href="{% url 'login_url' %}">Вход</a>
+                                    <a href="{% url 'registration_url' %}">Регистрация</a>
+                                    <a href="{% url 'registration2_url' %}">Регистрация2</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+        <script src="{% static 'Bootstrap/js/bootstrap.min.js' %}"></script>
+    {% block body1 %} {% endblock %}
+
+    {% block body2 %} {% endblock %}
+</body>
+</html>

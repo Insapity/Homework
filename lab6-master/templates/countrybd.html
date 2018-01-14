@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block body1 %}
+    <div id="header1">
+        <div class="container">
+            <div class="row centered">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h1><br>Таблица пользователей<br></h1>
+                <table class="table table-hover table-inverse">
+                <tr>
+                    <th>№</th>
+                    <td>ФИО</td>
+                    <td>Регистрация</td>
+                </tr>
+                {% for human in object_list %}
+                    <tr>
+                        <th scope="row">{{human.id_human}}</th>
+                        <td> {{human.fio}} </td>
+                        <td> {{human.get_registr_code}} </td>
+                    </tr>
+                {% endfor %}
+                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

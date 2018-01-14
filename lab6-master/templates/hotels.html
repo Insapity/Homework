@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block body1 %}
+   <h1>
+
+    {% for crt in data2.hotels %}
+        {% if crt.id == data1.hotel.id %}
+            {{ crt.hotel_name }}
+        {% endif %}
+    {% empty %}
+        empty list
+    {% endfor %}
+   </h1>
+{% endblock %}
+
+{% block body2 %}
+    <div class="col-lg-8 col-lg-offset-2">
+        <p>
+            {% for crt in data2.hotels %}
+                {% if crt.id == data1.hotel.id %}
+                    {{ crt.info }}
+                {% endif %}
+                {% empty %}
+                empty list
+            {% endfor %}
+        </p>
+    </div>
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block body1 %}
+    <div id="body1" style="text-align: left">
+        {% if object_list %}
+            <table id="courses">
+                <div class="course">
+                    {% for course in object_list %}
+                        <a href="/courses/{{ registr.id_registr }}" class="course-element">
+{#                            <div class="course-photo">#}
+{#                                {% if course.photo %}#}
+{#                                    <img class="img-course" src="{{ course.photo.url }}" width="100%" height="100%">#}
+{#                                {% endif %}#}
+{#                            </div>#}
+                            <span class="course-name">{{registr.code_registr}}</span>
+                            <span class="course-tutor">{{registr.nomer_registr}}</span>
+                        </a>
+                    {% endfor %}
+                </div>
+            </table>
+            {% if is_paginated %}
+                <div class="pagination">
+                    <span class="page-links">
+                        {% if page_obj.has_previous %}
+                            <a class="aquo" href="/courses?page={{ page_obj.previous_page_number }}">&laquo;</a>
+                        {% else %}
+                            <span class="unavailable" href="">&laquo;</span>
+                        {% endif %}
+                        {% for page in page_obj.paginator.page_range %}
+                            {% if page %}
+                                {% ifequal page page_obj.number %}
+                                    <span class="current-page" href="">{{ page }}</span>
+                                {% else %}
+                                    <a href="/courses?page={{ page }}" class="page">{{ page }}</a>
+                                {% endifequal %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <a class="aquo" href="/courses?page={{ page_obj.next_page_number }}">&raquo;</a>
+                        {% else %}
+                            <span class="unavailable" href="">&raquo;</span>
+                        {% endif %}
+                        <span hidden id="per-page">{{ page_obj.paginator.per_page }}</span>
+                    </span>
+                </div>
+            {% endif %}
+        {% else %}
+            <h3></h3>
+            <p>Пока не добавлено ни одного курса :(</p>
+        {% endif %}
+        {% if user.is_superuser %}
+            <a href="{% url 'course_add_url' %}">
+                <div class="add-button">&plus;</div>
+            </a>
+            <a href="#course-add-modal" data-toggle="modal">
+                <div class="add-button" style="color: orangered; bottom: 10%; border-color: orangered">&plus;</div>
+            </a>
+        {% endif %}
+        <div id="course-add-modal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h2 class="modal-title">Добавление нового курса</h2>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" enctype="multipart/form-data">
+                            <div class="add-form container">
+                                {% csrf_token %}
+                                <div class="course_add">
+                                    <label for="id_name_course">Название курса:</label>
+                                    <div class="data-and-error">
+                                        <input type="text" name="name_course" maxlength="100" required
+                                               id="id_name_course"/>
+                                        <h5 id="error_name_course">Заполните это поле</h5>
+                                    </div>
+                                </div>
+                                <div class="course_add">
+                                    <label for="id_photo">Фото:</label>
+                                    <div class="data-and-error">
+                                        <input type="file" name="photo" id="id_photo"/>
+                                    </div>
+                                </div>
+                                <div class="course_add">
+                                    <label for="id_subject">Категория:</label>
+                                    <div class="data-and-error">
+                                        <select name="subject" required id="id_subject">
+                                            <option value="" selected>Не выбрано</option>
+                                            {% for subject in subjects %}
+                                                <option value="{{ subject.id_subject }}">{{ subject }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <h5 id="error_subject_course">Выберете категорию</h5>
+                                    </div>
+                                </div>
+                                <div class="course_add">
+                                    <label for="id_tutor">Преподаватель:</label>
+                                    <div class="data-and-error">
+                                        <select name="tutor" required id="id_tutor" disabled>
+                                            <option value="" selected>Не выбрано</option>
+                                        </select>
+                                        <h5 id="error_tutor_course">Выберете преподавателя</h5>
+                                    </div>
+                                </div>
+                                <div class="course_add">
+                                    <label for="id_information">Дополнительная информация:</label>
+                                    <div class="data-and-error">
+                                        <textarea name="information" cols="40" rows="10" resize="none" maxlength="2055"
+                                                  id="id_information"></textarea>
+                                    </div>
+                                </div>
+                                <button type="submit" id="btn_add">Добавить курс</button>
+                                <br>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

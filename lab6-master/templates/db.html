@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block body1 %}
+    <div id="header1">
+        <div class="container">
+            <div class="centered">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h1>Сущности</h1>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="centered">
+                <li><a href="{% url 'hotels_url' %}">Отели</a></li>
+                <li><a href="{% url 'country_url' %}">Пользователи</a></li>
+                <li><a href="{% url 'userss_url' %}">Регистрации</a></li>
+                <li><a href="{% url 'nomera_url' %}">Номера</a></li>
+            </div>
+        </div>
+    </div>
+{% endblock %}

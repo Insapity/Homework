@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block body1 %}
+    <div id="header1">
+        <div class="container">
+            <div class="row centered">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h5>Choose hotel</h5>
+                </div>
+            </div>
+        </div>
+        <br><br>
+            <div class="container">
+            <div class="row centered">
+            {% load static %}
+            <div class="col-lg-4">
+                <a href="{% url 'courses_url' %}"><img src="{% static "images/Hotel1.jpg" %}" width="400" height="300" alt="Park image"/></a>
+            </div>
+            <div class="col-lg-4">
+                <a href="{% url 'courses_url' %}"><img src="{% static "images/Hotel2.jpg" %}" width="450" height="300" alt="Alexandria image"/></a>
+            </div>
+            <div class="col-lg-4">
+                <a href="{% url 'courses_url' %}"><img src="{% static "images/Hotel3.jpg" %}" width="350" height="300" alt="Voshod image"/></a>
+            </div>
+            </div>
+        <div class="row ">
+    <div class="col-md-4 col-sm-6">
+        <div class="pricingTable">
+            <div class="pricingTable-header">
+                <span class="price-value">Park Hotel</span>
+                <h3 class="title">Sliema</h3>
+            </div>
+                <ul class="pricing-content">
+                    <li>20$/night</li>
+                    <li>1 room</li>
+                    <li>+ TV</li>
+                    <li>1 bed</li>
+                </ul>
+                <a href="{% url 'course_add_url' %}" class="pricingTable-signup">Order</a>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6">
+        <div class="pricingTable">
+            <div class="pricingTable-header">
+                <span class="price-value">Alexandria</span>
+                <h3 class="title">Crimea</h3>
+            </div>
+                <ul class="pricing-content">
+                    <li>25$/night</li>
+                    <li>2 rooms</li>
+                    <li>+ TV</li>
+                    <li>2 beds</li>
+                </ul>
+                    <a href="{% url 'course_add_url' %}" class="pricingTable-signup">Order</a>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6">
+        <div class="pricingTable">
+            <div class="pricingTable-header">
+                <span class="price-value">Voshod</span>
+                 <h3 class="title">Malta</h3>
+            </div>
+                <ul class="pricing-content">
+                    <li>18$/night</li>
+                    <li>1 room</li>
+                    <li>- TV</li>
+                    <li>1 bed</li>
+                </ul>
+            <a href="{% url 'course_add_url' %}" class="pricingTable-signup">Order</a>
+        </div>
+    </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}
